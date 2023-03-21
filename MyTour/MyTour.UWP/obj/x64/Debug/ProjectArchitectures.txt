@@ -1,0 +1,1 @@
+E:\DACN01\MyTour\MyTour\MyTour.UWP\MyTour.UWP.csproj;x64

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:controls="clr-namespace:MyTour.Controls"
+             x:Class="MyTour.Views.SuccessPopup"
+             BackgroundClicked="PopupPage_BackgroundClicked"
+            
+             >
+    <StackLayout Padding="30" BackgroundColor="Transparent" HorizontalOptions="Center"
+        VerticalOptions="Center" >
+  
+            <Frame BackgroundColor="White" Padding="0,20,0,20" Margin="0">
+            <Image Source="{controls:ImageResource success.png}" ></Image>
+           </Frame>
+
+            <Button Padding="0" Text="Quay lại trang chủ !" TextTransform="None" Clicked="OnClose" BackgroundColor="White" TextColor="#404040" FontFamily="Dosis Medium" HeightRequest="30" FontSize="15"></Button>
+  
+
+
+
+    </StackLayout>
+</pages:PopupPage>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid        xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             RowDefinitions="Auto"
+             xmlns:handlers="clr-namespace:MyTour.Handlers"
+             x:Name="this"       
+             x:Class="MyTour.Controls.OutlinedEntryControl">
+    <Frame Grid.Row="0" Padding="8,2,8,2" BorderColor="LightGray" HeightRequest="40" CornerRadius="8">
+        <handlers:BorderlessEntry x:Name="txtEntry" 
+               Focused="txtEntry_Focused" 
+               Unfocused="txtEntry_Unfocused"
+               Text="{Binding Source={x:Reference this},Path=Text}"  />
+    </Frame>
+
+    <Label Grid.Row="0" 
+           FontSize="16"
+           x:Name="lblPlaceholder"
+           Margin="10,0,10,0"
+           TextColor="Gray"
+           Text="{Binding Source={x:Reference this},Path=Placeholder}"
+           BackgroundColor="Transparent"
+           HorizontalOptions="StartAndExpand"
+           VerticalOptions="CenterAndExpand"
+           />
+    <Grid.GestureRecognizers>
+        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+    </Grid.GestureRecognizers>
+</Grid>

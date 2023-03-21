@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:MyTour.ViewModels"
+             x:Class="MyTour.Views.LienhePage"
+             xmlns:controls="clr-namespace:MyTour.Controls">
+    <ContentPage.BindingContext>
+        <viewmodel:LienheViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid RowDefinitions="60">
+                <Grid ColumnDefinitions="60,*,80" BackgroundColor="White" Padding="10">
+                    <Grid Grid.Column="1" ColumnDefinitions="Auto,Auto" HorizontalOptions="CenterAndExpand">
+                        <Image Grid.Column="0" Source="{controls:ImageResource logo.png}" HeightRequest="30" WidthRequest="30" HorizontalOptions="Start"/>
+                        <Label Grid.Column="1" Text="My Tour" FontSize="20" FontFamily="FallDay"  TextColor="Black"/>
+                    </Grid>
+                    <Grid Grid.Column="2"></Grid>
+                </Grid>
+            </Grid>
+            <StackLayout Padding="10,0,10,10">
+            <Label Text="LIÊN HỆ VỚI CHÚNG TÔI" HorizontalOptions="Center" FontAttributes="Bold"  FontSize="20"></Label>
+                <Line HeightRequest="1" WidthRequest="80" Margin="100,5,100,5" BackgroundColor="Gray"/>
+                <controls:OutlinedEntryControl Text="{Binding ten}" Placeholder="Họ và tên"/>
+            <controls:OutlinedEntryControl Text="{Binding sdt}" Placeholder="Số điện thoại"/>
+            <controls:OutlinedEntryControl Text="{Binding matour}" Placeholder="Mã Tour"/>
+            <controls:OutlinedEntryControl Text="{Binding ghichu}" Placeholder="Ghi chú"/>
+            <Button Text="Gửi" Command="{Binding LienHeCommand}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

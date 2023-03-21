@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodel="clr-namespace:MyTour.ViewModels"
+             xmlns:controls="clr-namespace:MyTour.Controls"
+             x:Class="MyTour.Views.OrderTourPage"
+             >
+
+    <ContentPage.BindingContext>
+        <viewmodel:OrderTourViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Dosis Medium" />
+            <Setter Property="TextColor" Value="#404040" />
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+          <Grid RowDefinitions="60">
+                <Grid RowDefinitions="60">
+                    <Grid ColumnDefinitions="60,*,80"  BackgroundColor="White" Padding="10,0,0,0" >
+                        <Image Grid.Column="0" Source="{controls:ImageResource back.png}" HeightRequest="25" WidthRequest="25" HorizontalOptions="Start">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:OrderTourViewModel}}, Path=BackCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Grid Grid.Column="1" ColumnDefinitions="Auto,Auto" HorizontalOptions="CenterAndExpand" Padding="10">
+                            <Image Grid.Column="0" Source="{controls:ImageResource logo.png}" HeightRequest="30" WidthRequest="30" HorizontalOptions="Start"/>
+                            <Label Grid.Column="1" Text="My Tour" FontSize="20" FontFamily="FallDay"  TextColor="Black"/>
+                        </Grid>
+                        <Grid Grid.Column="2"></Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid RowDefinitions="Auto,*" Padding="10,0,10,0" >
+                <StackLayout Grid.Row="0">
+                    <Label Text="{Binding Tour.Tentour}" FontSize="22"  HorizontalTextAlignment="Center"/>
+                    <Line HeightRequest="2" Margin="100,5,100,10" BackgroundColor="LightBlue"></Line>
+                    <Grid ColumnDefinitions="Auto,Auto" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" HeightRequest="40">
+                        <Label Text="Ngày khởi hành: " Grid.Column="0" FontSize="20" Margin="0,5"/>
+                        <Frame Grid.Column="1" BackgroundColor="White" HeightRequest="20" Padding="5" BorderColor="LightGray" CornerRadius="5">
+                            <DatePicker x:Name="NgayKhoiHanh"  Date="{Binding NgayKhoiHanh}" FontSize="18" />
+                        </Frame>
+                    </Grid>
+                    <Grid ColumnDefinitions="Auto,20,Auto" HorizontalOptions="Center">
+                        <Label Grid.Column="0" Text="Số lượng: " FontSize="18" Margin="0,7"></Label>
+                        <Entry Grid.Column="1" WidthRequest="20"  x:Name="lbldisp" Text="{Binding SoLuong}" HorizontalOptions="CenterAndExpand"/>
+                        <Stepper Grid.Column="2"
+                         Value="0" 
+                         Minimum="0" 
+                         Maximum="{Binding Tour.SoTour}" 
+                         Increment="1" 
+                         HorizontalOptions="Center" 
+                         VerticalOptions="CenterAndExpand"
+                         ValueChanged="OnValueChanged" 
+                         HeightRequest="40"
+                         BackgroundColor="Transparent"
+                         />
+                       
+                    </Grid>
+                    
+                    
+                </StackLayout>
+
+
+
+
+                <Grid Grid.Row="1">
+                    <Grid RowDefinitions="Auto,Auto">
+                        <StackLayout Grid.Row="0">
+                            <controls:OutlinedEntryControl Text="{Binding _HoVaTen}" Placeholder="Họ và tên"/>
+                            <controls:OutlinedEntryControl Text="{Binding _Phone}" Placeholder="Số điện thoại"/>
+                            <controls:OutlinedEntryControl Text="{Binding _Email}" Placeholder="Email"/>
+                            <controls:OutlinedEntryControl Text="{Binding _DiaChi}" Placeholder="Địa chỉ"/>
+                        </StackLayout>
+                        <StackLayout Grid.Row="0" IsVisible="{Binding IsUser}" >
+                            <controls:OutlinedEntryControl Text="{Binding CurrentUser.HoVaTen}" IsEnabled="False"/>
+                            <controls:OutlinedEntryControl Text="{Binding CurrentUser.Phone}"  IsEnabled="False"/>
+                            <controls:OutlinedEntryControl Text="{Binding CurrentUser.Email}"  IsEnabled="False"/>
+                            <controls:OutlinedEntryControl Text="{Binding CurrentUser.DiaChi}" IsEnabled="False"/>
+                        </StackLayout>
+                        <StackLayout Grid.Row="1">
+                            <controls:OutlinedEntryControl Text="{Binding GhiChu}" Placeholder="Ghi chú"/>
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+            
+        </Grid>
+            <Grid RowDefinitions="65"  VerticalOptions="EndAndExpand" Padding="10,5,0,0" Margin="0">
+                <Grid  ColumnDefinitions="*, Auto" >
+                    <Grid Grid.Column="0" VerticalOptions="CenterAndExpand">
+                        <Grid  Grid.Row="0" ColumnDefinitions="Auto,Auto"   >
+                            <Label Grid.Column="0" Text="Tổng cộng :" FontSize="18"></Label>
+                            <Label Grid.Column="1" x:Name="lblTotal"
+                               TextColor="#00c1de" FontSize="20" 
+                               FontAttributes="Bold"
+                               FontFamily="Dosis SemiBold"
+                              ></Label>
+                            <Label x:Name="lblGia" Text="{Binding Tour.Gia}" IsVisible="False"></Label>
+                        </Grid>
+                    </Grid>
+
+                    <Button Margin="12" Grid.Column="1" HeightRequest="40" WidthRequest="100" TextColor="White"  Text="Đặt tour" FontSize="14" FontAttributes="Bold" HorizontalOptions="EndAndExpand" BackgroundColor="Aqua" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:OrderTourViewModel}}, Path=OrderTourCommand}"/>
+                    <Button Margin="12" Grid.Column="1" HeightRequest="40" WidthRequest="100" TextColor="White"  Text="Đặt tour" FontSize="14" FontAttributes="Bold" HorizontalOptions="EndAndExpand" BackgroundColor="Aqua" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:OrderTourViewModel}}, Path=OrderTourLoginedCommand}" IsVisible="{Binding IsUser}"/>
+
+                </Grid>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

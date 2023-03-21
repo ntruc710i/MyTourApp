@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+       xmlns:localview="clr-namespace:MyTour.Views"
+       x:Class="MyTour.ShellMainPage"
+       Shell.BackgroundColor="LightBlue"
+       >
+        
+    <TabBar>
+        <Tab  Icon="home.png">
+            <ShellContent>
+                <localview:HomePage Title="Home"/>
+            </ShellContent>
+        </Tab>
+        <Tab  Icon="tours.png">
+            <ShellContent>
+                <localview:ToursPage Title="ToursPage"/>
+            </ShellContent>
+        </Tab>
+        
+    </TabBar>
+</Shell>

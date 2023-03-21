@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:MyTour.ViewModels"
+             xmlns:controls ="clr-namespace:MyTour.Controls"
+             xmlns:model="clr-namespace:MyTour.Models"
+             x:Class="MyTour.Views.OrderHistoryPage"
+             BackgroundColor="LightGray">
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Dosis Medium" />
+            <Setter Property="TextColor" Value="#404040" />
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid RowDefinitions="60">
+                <Grid ColumnDefinitions="60,*,80"  BackgroundColor="White" Padding="10,0,0,0" >
+                    <Image Grid.Column="0" Source="{controls:ImageResource back.png}" HeightRequest="25" WidthRequest="25" HorizontalOptions="Start">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:OrderHistoryViewModel}}, Path=BackCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Grid Grid.Column="1" ColumnDefinitions="Auto,Auto" HorizontalOptions="CenterAndExpand" Padding="10">
+                        <Image Grid.Column="0" Source="{controls:ImageResource logo.png}" HeightRequest="30" WidthRequest="30" HorizontalOptions="Start"/>
+                        <Label Grid.Column="1" Text="My Tour" FontSize="20" FontFamily="FallDay"  TextColor="Black"/>
+                    </Grid>
+                    <Grid Grid.Column="2"></Grid>
+                </Grid>
+            </Grid>
+            <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                <!--  <RefreshView x:DataType="viewmodel:ToursViewModel" Command="{Binding LoadToursCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}"> -->
+                <Grid RowDefinitions="*" Padding="10">
+                    <CollectionView x:Name="OrdersListView"
+                ItemsSource="{Binding Orders}"
+                SelectionMode="None" 
+                         Grid.Row="0">
+                        <CollectionView.EmptyView>
+                            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="Not Data"/>
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="10"></GridItemsLayout>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:LSDonHang">
+                                <Frame Grid.Row="1" Margin="10" HasShadow="True"  CornerRadius="15" >
+                                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  Padding="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0" Source="{Binding Anh}" Aspect="AspectFill" ></Image>
+                                        <Grid Grid.Column="1" HeightRequest="125"
+                                              RowDefinitions="25,Auto,Auto">
+                                            <Label Grid.Row="0" FontSize="18" Text="{Binding TenTour}"></Label>
+                                            <Grid Grid.Row="1"
+                                            >
+                                                <StackLayout >
+                                                    <Grid ColumnDefinitions="Auto,Auto">
+                                                        <Label Grid.Column="0" Text="Thời gian: " ></Label>
+                                                        <Label Grid.Column="1" Text="{Binding ThoiGian}" ></Label>
+                                                    </Grid>
+                                                    <Grid ColumnDefinitions="Auto,Auto">
+                                                        <Label Grid.Column="0" Text="Ngày khởi hành: " ></Label>
+                                                        <Label Grid.Column="1" Text="{Binding NgayKhoiHanh}" ></Label>
+                                                    </Grid>
+                                                    <Grid ColumnDefinitions="140,Auto">
+                                                        <Grid Grid.Column="0" ColumnDefinitions="Auto,Auto">
+                                                            <Label Grid.Column="0" Text="Ngày đặt: " ></Label>
+                                                            <Label Grid.Column="1" Text="{Binding NgayDat}" ></Label>
+                                                        </Grid>
+                                                        <Grid Grid.Column="1" ColumnDefinitions="Auto,Auto">
+                                                            <Label Grid.Column="0" Text="Số lượng: " ></Label>
+                                                            <Label Grid.Column="1" Text="{Binding SoLuong}" ></Label>
+                                                        </Grid>
+                                                    </Grid>
+
+                                                </StackLayout>
+                                            </Grid>
+                                            <Grid   Grid.Row="2"
+                                                    ColumnDefinitions="Auto,Auto">
+                                                <Label Grid.Column="0" Text="Tổng tiền: " ></Label>
+                                                <Label Grid.Column="1" 
+                                                       Text="{Binding ThanhTien,StringFormat='{0:0,0}'}" 
+                                                       TextColor="#00c1de"
+                                                       FontAttributes="Bold"
+                                                       FontFamily="Dosis SemiBold"
+                                                      ></Label> 
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                </Grid>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

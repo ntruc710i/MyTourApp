@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:MyTour.ViewModels"
+             xmlns:controls="clr-namespace:MyTour.Controls"
+             x:Class="MyTour.Views.TourDetailsPage">
+    <ContentPage.BindingContext>
+        <viewmodel:TourDetailsViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Rockolf" />
+            <Setter Property="TextColor" Value="#404040" />
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid RowDefinitions="60">
+                <Grid ColumnDefinitions="60,*,80"  BackgroundColor="White" Padding="10,0,0,0" >
+                    <Image Grid.Column="0" Source="{controls:ImageResource back.png}" HeightRequest="25" WidthRequest="25" HorizontalOptions="Start">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourDetailsViewModel}}, Path=BackCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Grid Grid.Column="1" ColumnDefinitions="Auto,Auto" HorizontalOptions="CenterAndExpand" Padding="10">
+                        <Image Grid.Column="0" Source="{controls:ImageResource logo.png}" HeightRequest="30" WidthRequest="30" HorizontalOptions="Start"/>
+                        <Label Grid.Column="1" Text="My Tour" FontSize="20" FontFamily="FallDay"  TextColor="Black"/>
+                    </Grid>
+                    <Grid Grid.Column="2"></Grid>
+                </Grid>
+            </Grid>
+            <ScrollView Padding="10,0,10,10">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="18"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+
+                <Label   Grid.Row="1" Text="{Binding Tour.Tentour}" FontFamily="Dosis Medium" FontSize="22" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"></Label>
+                <Frame Grid.Row="2" CornerRadius="5" Padding="0" Margin="0" >
+                    <Image Source="{Binding Tour.Anh}" Aspect="Fill"></Image>
+                </Frame>
+                
+                <Grid Grid.Row="3" ColumnDefinitions="120,120,120" HorizontalOptions="Center">
+                    <Grid  Grid.Column="0" ColumnDefinitions="Auto,Auto" HorizontalOptions="CenterAndExpand">
+                        <Image  Grid.Column="0" Source="time.jpg" HeightRequest="13" ></Image>
+                        <Label Grid.Column="1" Text="{Binding Tour.Thoigian}" FontSize="13"></Label>
+                    </Grid>
+                    <Grid  Grid.Column="1" ColumnDefinitions="Auto,Auto" HorizontalOptions="CenterAndExpand">
+                        <Image  Grid.Column="0" Source="air.png" HeightRequest="13" ></Image>
+                        <Label Grid.Column="1" Text="{Binding Tour.Noixuatphat}" FontSize="13"></Label>
+                    </Grid>
+                    <Grid  Grid.Column="2" ColumnDefinitions="Auto,Auto" HorizontalOptions="CenterAndExpand">
+                        <Label Grid.Column="0" Text="Phương tiện:" FontSize="13"></Label>
+                        <Image  Grid.Column="1" Source="car.png" HeightRequest="13" Margin="0,2,0,0" ></Image>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="4" >
+                    <Label Text="{Binding Tour.Thongtin }"></Label>
+                </Grid>
+                
+            </Grid>
+        </ScrollView>
+            <Grid RowDefinitions="65"  VerticalOptions="EndAndExpand" Padding="10,5,0,0" Margin="0">
+                <Grid  ColumnDefinitions="*, Auto" >
+                    <Grid Grid.Column="0" RowDefinitions="Auto,Auto">
+                        <Grid  Grid.Row="0" ColumnDefinitions="Auto,Auto"   >
+                            <Label Grid.Column="0" Text="Còn lại" FontSize="16"></Label>
+                            <Label Grid.Column="1"  Text="{Binding Tour.SoTour} " FontSize="16"></Label>
+                        </Grid>
+
+                        <Label Grid.Row="1" 
+                               Text="{Binding Tour.Gia,StringFormat='{0:0,0}'}" 
+                               TextColor="#00c1de" FontSize="20" 
+                               FontAttributes="Bold"
+                               FontFamily="Dosis SemiBold"
+                              ></Label>
+                    </Grid>
+
+                    <Button Margin="12" Grid.Column="1" HeightRequest="40" WidthRequest="100" TextColor="White"  Text="Đặt tour" FontSize="14" FontAttributes="Bold" HorizontalOptions="EndAndExpand" BackgroundColor="Aqua" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourDetailsViewModel}}, Path=OCommand}"/>
+
+                </Grid>
+            </Grid>
+            
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

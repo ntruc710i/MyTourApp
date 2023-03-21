@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:MyTour.ViewModels"
+             xmlns:controls="clr-namespace:MyTour.Controls"  
+             x:Class="MyTour.Views.Template.LocationView">
+    <ContentView.BindingContext>
+        <viewmodels:HomeViewModel/>
+    </ContentView.BindingContext>
+    <ContentView.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Rockolf" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Padding" Value="8" />
+        </Style>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0"  ColumnDefinitions="Auto,*" >
+                    <Grid RowDefinitions="100,Auto" HorizontalOptions="Center">
+                        <Frame Grid.Column="0"  HeightRequest="100"  CornerRadius="4" HasShadow="True" Margin="0" Padding="0">
+                            <Image Source="{controls:ImageResource dalat.jpg}" Aspect="AspectFill"></Image>
+                        </Frame>
+                        <Label Grid.Column="0" Text="Đà Lạt">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TapAreaTours}"
+                                                          CommandParameter="6"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Grid Grid.Row="1" ColumnDefinitions="Auto,Auto" HorizontalOptions="Center" >
+                            <Frame Grid.Column="0" BackgroundColor="Black" WidthRequest="125"  HeightRequest="100"  CornerRadius="4" HasShadow="True" Margin="0" Padding="0">
+                                <Image Source="{controls:ImageResource nhatrang.jpg}" Aspect="AspectFill">
+
+                                </Image>
+
+                            </Frame>
+                            <Label Grid.Column="0" Text="Nha Trang">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TapAreaTours}"
+                                                          CommandParameter="4"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Frame Grid.Column="1" BackgroundColor="Black" WidthRequest="125"  HeightRequest="100"  CornerRadius="4" HasShadow="True" Margin="0" Padding="0">
+                                <Image Source="{controls:ImageResource vinhhalong.jpg}" Aspect="AspectFill"></Image>
+                            </Frame>
+                            <Label Grid.Column="1" Text="Hạ Long">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TapAreaTours}"
+                                                          CommandParameter="2"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                    </Grid>
+                    <Frame Grid.Column="1" BackgroundColor="Black"  CornerRadius="4" HasShadow="True" Margin="0" Padding="0">
+                        <Image Source="{controls:ImageResource danang.jpg}" Aspect="AspectFill"></Image>
+                    </Frame>
+                    <Label Grid.Column="1" Text="Đà Nẵng">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TapAreaTours}"
+                                                          CommandParameter="1"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+                <Grid Grid.Row="1" >
+                    <Grid ColumnDefinitions="Auto, *">
+
+                        <Frame Grid.Column="0"  WidthRequest="125" CornerRadius="4" HasShadow="True" Margin="0" Padding="0">
+                            <Image Source="{controls:ImageResource quynhon.jpg}" Aspect="AspectFill"></Image>
+                        </Frame>
+                        <Label Grid.Column="0" Text="Quy Nhơn">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TapAreaTours}"
+                                                          CommandParameter="3"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Frame Grid.Column="1"   CornerRadius="4" HasShadow="True" Margin="0" Padding="0">
+                            <Image Source="{controls:ImageResource sapa.jpg}" Aspect="AspectFill"></Image>
+                        </Frame>
+                        <Label Grid.Column="1" Text="Sa Pa">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TapAreaTours}"
+                                                          CommandParameter="5"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

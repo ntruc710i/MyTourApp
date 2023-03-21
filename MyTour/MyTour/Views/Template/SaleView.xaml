@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:MyTour.ViewModels"
+             x:Class="MyTour.Views.Template.SaleView">
+    <ContentView.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Dosis Medium" />
+            <Setter Property="TextColor" Value="#404040" />
+        </Style>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid WidthRequest="160" Margin="0">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer                
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomeViewModel}}, Path=DetailCommand}"      
+                    CommandParameter="{Binding}"/>
+            </Grid.GestureRecognizers>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="140"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+            <BoxView Grid.Row="1" CornerRadius="10" Grid.RowSpan="2" BackgroundColor="Transparent" ></BoxView>
+            <Frame Grid.Row="0" Grid.RowSpan="2" CornerRadius="5" HasShadow="True" Margin="0" Padding="0" >
+                <Image Source="{Binding Anh}" Aspect="AspectFill">
+                </Image>
+            </Frame>
+
+            <StackLayout Padding="3,0,3,0" Grid.Row="2">
+                <Label Text="{Binding Tentour}"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" Grid.Row="1" >
+                <Label Margin="7,0,7,7" Padding="2" Text="{Binding Gia,StringFormat='{0:0,0}'}" HorizontalOptions="StartAndExpand" TextColor="White" FontSize="12" BackgroundColor="Gray"/>
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

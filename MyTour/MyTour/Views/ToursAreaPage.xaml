@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyTour.Views.ToursAreaPage"
+             xmlns:controls ="clr-namespace:MyTour.Controls"
+             xmlns:viewmodel="clr-namespace:MyTour.ViewModels"  
+             xmlns:model="clr-namespace:MyTour.Models"  >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="Dosis Medium" />
+                <Setter Property="TextColor" Value="#404040" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid RowDefinitions="60">
+                <Grid ColumnDefinitions="60,*,80"  BackgroundColor="White" Padding="10,0,0,0" >
+                    <Image Grid.Column="0" Source="{controls:ImageResource back.png}" HeightRequest="25" WidthRequest="25" HorizontalOptions="Start">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ToursAreaViewModel}}, Path=BackCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Grid Grid.Column="1" ColumnDefinitions="Auto,Auto" HorizontalOptions="CenterAndExpand" Padding="10">
+                        <Image Grid.Column="0" Source="{controls:ImageResource logo.png}" HeightRequest="30" WidthRequest="30" HorizontalOptions="Start"/>
+                        <Label Grid.Column="1" Text="My Tour" FontSize="20" FontFamily="FallDay"  TextColor="Black"/>
+                    </Grid>
+                    <Grid Grid.Column="2"></Grid>
+                </Grid>
+            </Grid>
+            <RefreshView x:DataType="viewmodel:ToursAreaViewModel" Command="{Binding ToursAreaCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                <Grid RowDefinitions="*" Padding="10">
+                    <CollectionView x:Name="ToursAreaListView"
+                ItemsSource="{Binding Tours}"
+                SelectionMode="None" 
+                         Grid.Row="0">
+                        <CollectionView.EmptyView>
+                            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="Not Data"/>
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout HorizontalItemSpacing="10" VerticalItemSpacing="10" Orientation="Vertical" Span="2"></GridItemsLayout>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Tour">
+                                <Grid WidthRequest="160" Margin="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="100"/>
+                                        <RowDefinition Height="50"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="40"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer                
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ToursAreaViewModel}}, Path=DetailCommand}"      
+                                        CommandParameter="{Binding}"/>
+                                    </Grid.GestureRecognizers>
+                                    <BoxView Grid.Row="1" CornerRadius="10" Grid.RowSpan="2" BackgroundColor="Transparent" ></BoxView>
+                                    <BoxView Grid.Row="2" CornerRadius="10" Grid.RowSpan="2" BackgroundColor="Transparent" ></BoxView>
+                                    <Frame Grid.Row="0" Grid.RowSpan="2" CornerRadius="2" HasShadow="True" Margin="0" Padding="0"  >
+                                        <Image Source="{Binding Anh}" Aspect="AspectFill" HeightRequest="200">
+                                        </Image>
+                                    </Frame>
+
+                                    <StackLayout Margin="5" Grid.Row="2" Orientation="Vertical">
+                                        <Label Text="{Binding Tentour}"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Grid.Row="3" >
+                                        <Label Margin="10,0,10,10" Text="{Binding Gia,StringFormat='{0:0,0}'}" HorizontalOptions="StartAndExpand" TextColor="#00c1de" FontSize="Medium"/>
+                                    </StackLayout>
+
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                </Grid>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

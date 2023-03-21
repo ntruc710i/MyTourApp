@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:MyTour.ViewModels"
+             xmlns:controls="clr-namespace:MyTour.Controls"
+             x:Class="MyTour.Views.ProfilePage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid RowDefinitions="Auto">
+            <Grid
+                    Grid.Row="0"
+                    RowDefinitions="70, 50, 50, 50,50"
+                    >
+                <!-- PROFILE -->
+                <!-- Khi chưa đăng nhập -->
+                <Grid
+                        Grid.Row="0"
+                        ColumnDefinitions="10, *, Auto"
+                        BackgroundColor="White"
+                        Padding="25,10,10,10"
+                        Margin="0,0,0,8"
+                        
+                        >
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ProfileViewModel}}, Path=LoginCommand}"></TapGestureRecognizer>
+                    </Grid.GestureRecognizers>
+                    <Grid
+                            Grid.Column="1"
+                            RowSpacing="0"
+                            VerticalOptions="Center"
+                            >
+                        <Label FontSize="18" TextColor="Black" Text="Đăng nhập/Đăng ký"/>
+                    </Grid>
+                    <Grid
+                            Grid.Column="2">
+                        <Image  Source="{controls:ImageResource forward.png}" HeightRequest="25" WidthRequest="25"></Image>
+                    </Grid>
+                </Grid>
+
+                <!-- Cài Đặt -->
+                <Grid
+                        Grid.Row="1"
+                        ColumnDefinitions="Auto, *, Auto"
+                        BackgroundColor="White"
+                        Padding="25,10,10,10"
+                        Margin="0,0,0,5"
+                    >
+                        <Image  Source="{controls:ImageResource settings.png}" HeightRequest="20" WidthRequest="20">
+                        
+                    </Image>
+                    <Grid
+                            Grid.Column="1"
+                            RowSpacing="0"
+                            VerticalOptions="Center"
+                            >
+                        <Label FontSize="16" TextColor="Black" Text="Cài Đặt"/>
+                    </Grid>
+
+                </Grid>
+                    <Grid
+                        Grid.Row="2"
+                        ColumnDefinitions="Auto, *, Auto"
+                        BackgroundColor="White"
+                        Padding="25,10,10,10"
+                    Margin="0,0,0,5">
+                        <Image  Source="{controls:ImageResource info.png}" HeightRequest="20" WidthRequest="20">
+                            
+                        </Image>
+                        <Grid
+                            Grid.Column="1"
+                            RowSpacing="0"
+                            VerticalOptions="Center"
+                            >
+                            <Label FontSize="16" TextColor="Black" Text="Thông tin ứng dụng"/>
+                        </Grid>
+
+                    </Grid>
+                </Grid>
+            
+            <!-- Khi đã đăng nhập -->
+            <Grid
+                Grid.Row="0"
+                    RowDefinitions="70, 50, 50, 50,50"
+                    IsVisible="{Binding IsUser, Mode=TwoWay}"
+                    >
+                <!-- PROFILE -->
+                <Grid
+                        Grid.Row="0"
+                        ColumnDefinitions="Auto, *, Auto"
+                        BackgroundColor="White"
+                        Padding="25,10,10,10"
+                        Margin="0,0,0,8"
+                        
+                        >
+                    <Image  Source="{controls:ImageResource logo.png}">
+                        <Image.Clip>
+                            <EllipseGeometry 
+                                Center="30, 30"
+                                RadiusX="30"
+                                RadiusY="30" />
+                        </Image.Clip>
+                    </Image>
+                    <Grid
+                            Grid.Column="1"
+                            RowSpacing="0"
+                            VerticalOptions="Center"
+                            >
+                            <Label FontSize="18" TextColor="Black" Text="{Binding KH.HoVaTen}"/>
+                    </Grid>
+                    <Grid
+                            Grid.Column="2">
+                        <Image  Source="{controls:ImageResource forward.png}" HeightRequest="25" WidthRequest="25"></Image>
+                    </Grid>
+                </Grid>
+                <!-- Đơn hàng -->
+                <Grid
+                        Grid.Row="1"
+                        ColumnDefinitions="Auto, *, Auto"
+                        BackgroundColor="White"
+                        Padding="25,10,10,10"
+                        Margin="0,0,0,5"
+                        >
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ProfileViewModel}}, Path=OrderHistoryCommand}"></TapGestureRecognizer>
+                        </Grid.GestureRecognizers>
+                        <Image  Source="{controls:ImageResource bag.png}" HeightRequest="20" WidthRequest="20">
+                        
+                    </Image>
+                    <Grid
+                            Grid.Column="1"
+                            RowSpacing="0"
+                            VerticalOptions="Center"
+                            >
+                        <Label FontSize="16" TextColor="Black" Text=" Lịch sử đơn hàng"/>
+                    </Grid>
+                </Grid>
+
+                <!-- Cài Đặt -->
+                <Grid
+                        Grid.Row="2"
+                        ColumnDefinitions="Auto, *, Auto"
+                        BackgroundColor="White"
+                        Padding="25,10,10,10"
+                        Margin="0,0,0,5"
+                    >
+                        <Image  Source="{controls:ImageResource settings.png}" HeightRequest="20" WidthRequest="20">
+                        
+                    </Image>
+                    <Grid
+                            Grid.Column="1"
+                            RowSpacing="0"
+                            VerticalOptions="Center"
+                            >
+                        <Label FontSize="16" TextColor="Black" Text=" Cài Đặt"/>
+                    </Grid>
+
+                </Grid>
+                <Grid
+                        Grid.Row="3"
+                        ColumnDefinitions="Auto, *, Auto"
+                        BackgroundColor="White"
+                        Padding="25,10,10,10"
+                    Margin="0,0,0,5">
+                        <Image  Source="{controls:ImageResource info.png}" HeightRequest="20" WidthRequest="20">
+                        
+                    </Image>
+                    <Grid
+                            Grid.Column="1"
+                            RowSpacing="0"
+                            VerticalOptions="Center"
+                            >
+                        <Label FontSize="16" TextColor="Black" Text=" Thông tin ứng dụng"/>
+                    </Grid>
+
+                </Grid>
+
+                <Grid
+                        Grid.Row="4"
+                        ColumnDefinitions="Auto, *, Auto"
+                        BackgroundColor="White"
+                        Padding="25,10,10,10"
+                        Margin="0,0,0,5"
+                        >
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ProfileViewModel}}, Path=LogoutCommand}"></TapGestureRecognizer>
+                        </Grid.GestureRecognizers>
+                        <Image  Source="{controls:ImageResource logout.png}" HeightRequest="20" WidthRequest="20" >
+                       
+                    </Image>
+                    <Grid
+                            Grid.Column="1"
+                            RowSpacing="0"
+                            VerticalOptions="Center"
+                            >
+                        <Label FontSize="16" TextColor="Red" Text=" Đăng xuất"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>

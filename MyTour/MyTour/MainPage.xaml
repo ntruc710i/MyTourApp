@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyTour.MainPage"
+             xmlns:local="clr-namespace:MyTour.ViewModels"  
+             xmlns:model="clr-namespace:MyTour.Models"  
+             xmlns:localview="clr-namespace:MyTour.Views"
+             xmlns:controls="clr-namespace:MyTour.Controls"
+             x:Name="BrowseItemsPage2"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             android:TabbedPage.ToolbarPlacement="Bottom"
+             android:TabbedPage.IsSmoothScrollEnabled="True"
+             android:TabbedPage.IsSwipePagingEnabled="False"
+             BackgroundColor="#f7f7f7"
+             BarBackgroundColor="White"
+             >
+    <!-- HOME TAB -->
+    <localview:HomePage IconImageSource="{controls:ImageResource home.png}" Title="Home"/>
+    <!-- Tour TAB -->
+    <localview:ToursPage IconImageSource = "{controls:ImageResource tours.png}" Title="Tours"/>
+    <!-- Support-->
+    <localview:LienhePage IconImageSource="{controls:ImageResource support.png}" Title="Support"/>
+
+    <!-- Profile-->
+    <localview:ProfilePage IconImageSource="{controls:ImageResource profile2.png}" Title="Profile"/>
+    
+</TabbedPage>
+
+

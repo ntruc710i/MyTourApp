@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyTour.Views.HomePage"
+             xmlns:templates="clr-namespace:MyTour.Views.Template"
+             xmlns:controls="clr-namespace:MyTour.Controls"  
+             xmlns:viewmodel="clr-namespace:MyTour.ViewModels" >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="WelcomeContainerStyle" TargetType="Grid">
+                <Setter Property="Margin" Value="10, 0, 0, 0" />
+            </Style>
+            <Style x:Key="WelcomeTitleStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="Rockolf" />
+                <Setter Property="TextColor" Value="Gray" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+
+            <Style x:Key="WelcomeSubtitleStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="Dosis SemiBold" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="18" />
+            </Style>
+
+            <Style x:Key="SectionText1Style" TargetType="Label">
+                <Setter Property="TextColor" Value="#404040" />
+                <Setter Property="FontFamily" Value="Dosis SemiBold" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Margin" Value="0,0,0,2" />
+            </Style>
+
+            <Style x:Key="SectionText2Style" TargetType="Label" BasedOn="{StaticResource SectionText1Style}">
+                <Setter Property="FontSize" Value="16" />
+            </Style>
+
+            <Style x:Key="SectionDotsStyle" TargetType="Label" BasedOn="{StaticResource SectionText1Style}">
+                <Setter Property="TextColor" Value="Gray" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="CharacterSpacing" Value="2" />
+                <Setter Property="HorizontalOptions" Value="End" />
+            </Style>
+
+            <Style x:Key="FilterContainerStyle" TargetType="Grid">
+                <Setter Property="HeightRequest" Value="54" />
+                <Setter Property="Margin" Value="0, 10" />
+            </Style>
+
+            <Style x:Key="SearchBarContainerStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="Padding" Value="6" />
+                <Setter Property="Margin" Value="0, 0, 10, 0" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout >
+            <Grid RowDefinitions="60">
+                <Grid ColumnDefinitions="60,*,80" BackgroundColor="White" Padding="10">
+                <Grid Grid.Column="1" ColumnDefinitions="Auto,Auto" HorizontalOptions="CenterAndExpand">
+                        <Image Grid.Column="0" Source="{controls:ImageResource logo.png}" HeightRequest="30" WidthRequest="30" HorizontalOptions="Start"/>
+                    <Label Grid.Column="1" Text="My Tour" FontSize="20" FontFamily="FallDay"  TextColor="Black"/>
+                </Grid>
+                <Grid Grid.Column="2"></Grid>
+            </Grid>
+            </Grid>
+            
+        <ScrollView VerticalScrollBarVisibility="Never">
+              <Grid 
+                RowDefinitions="Auto, Auto, Auto,Auto"
+                Padding="10">
+
+                    <Frame Grid.Row="0" Padding="0" OutlineColor="LightGray"  CornerRadius="10" HasShadow="True" HorizontalOptions="FillAndExpand"  VerticalOptions="Center">
+                        <SearchBar Placeholder="Tìm kiếm tour ..." FontSize="15" PlaceholderColor="LightGray"></SearchBar>
+                        </Frame>
+                    
+                
+                <Grid Grid.Row="1"
+                  RowDefinitions="Auto,250"
+                  
+                  >
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label 
+                                Text="Tour Khuyến mãi"
+                                Style="{StaticResource SectionText1Style}"/>
+                        <Label 
+                                Grid.Column="1"
+                                Text="..."
+                                Style="{StaticResource SectionDotsStyle}"/>
+                    </Grid>
+                    <CollectionView  Grid.Row="1"
+                                        x:Name="ItemsListViewSale" 
+                                        ItemsSource="{Binding SaleTours}"
+                                        >
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout
+                                    Orientation="Horizontal" ItemSpacing="10" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <templates:SaleView/>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+                <Grid Grid.Row="2"
+                  RowDefinitions="Auto,520,30"
+                  >
+                    <Grid
+                            ColumnDefinitions="*, Auto">
+                        <Label 
+                                Text="Tour nỗi bật"
+                                Style="{StaticResource SectionText1Style}"/>
+                        <Label 
+                                Grid.Column="1"
+                                Text="..."
+                                Style="{StaticResource SectionDotsStyle}"/>
+                    </Grid>
+                        <CollectionView  VerticalScrollBarVisibility="Never"
+                                        Grid.Row="1"
+                                        x:Name="ItemsListViewRec" 
+                                        ItemsSource="{Binding RecTours}"
+                                        >
+                        <CollectionView.ItemsLayout>
+                           
+                                <GridItemsLayout   HorizontalItemSpacing="10" VerticalItemSpacing="10" Orientation="Vertical" Span="2"></GridItemsLayout>
+                           
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <templates:SaleView/>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Button Grid.Row="2" WidthRequest="100" Text="Xem tất cả" FontSize="10" HorizontalOptions="Center" BackgroundColor="White" BorderColor="LightGray" BorderWidth="1" CornerRadius="5"></Button>
+                </Grid>
+                <Grid Grid.Row="3"
+                      RowDefinitions="Auto, Auto">
+
+                    <Label
+                        Text="Địa điểm du lịch đặc sắc"
+                        Style="{StaticResource SectionText1Style}"></Label>
+
+                    <Grid Grid.Row="1">
+                        <templates:LocationView />
+                    </Grid>
+                    
+                </Grid>
+            </Grid>
+        </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
